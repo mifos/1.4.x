@@ -1,0 +1,136 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ehcache="http://www.springmodules.org/schema/ehcache"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+	http://www.springmodules.org/schema/ehcache http://www.springmodules.org/schema/cache/springmodules-ehcache.xsd">
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation">
+			<value>classpath:org/mifos/config/resources/ehcache.xml</value>
+		</property>
+	</bean>
+	<bean id="cacheProviderFacade" class="org.springmodules.cache.provider.ehcache.EhCacheFacade">
+		<property name="cacheManager" ref="cacheManager" />
+	</bean>
+	<bean id="collectionSheetService"
+		class="org.mifos.application.reports.business.service.CollectionSheetService" />
+	<bean id="officeBusinessService"
+		class="org.mifos.application.office.business.service.OfficeBusinessService" />
+	<bean id="personnelBusinessService"
+		class="org.mifos.application.personnel.business.service.PersonnelBusinessService" />
+	<bean id="customerBusinessService"
+		class="org.mifos.application.customer.business.service.CustomerBusinessService" />
+	<bean id="accountBusinessService"
+		class="org.mifos.application.accounts.business.service.AccountBusinessService" />
+	<bean id="savingsPrdBusinessService"
+		class="org.mifos.application.productdefinition.business.service.SavingsPrdBusinessService" />
+	<bean id="loanPrdBusinessService"
+		class="org.mifos.application.productdefinition.business.service.LoanPrdBusinessService" />
+	<bean id="prdOfferingPersistence"
+		class="org.mifos.application.productdefinition.persistence.PrdOfferingPersistence" />
+	<bean id="branchReportPersistence"
+		class="org.mifos.application.branchreport.persistence.BranchReportPersistence" />
+	<bean id="branchCashConfirmationReportPersistence"
+		class="org.mifos.application.cashconfirmationreport.persistence.BranchCashConfirmationReportPersistence">
+		<constructor-arg ref="prdOfferingPersistence" />
+	</bean>
+	<bean id="reportProductOfferingService"
+		class="org.mifos.application.reports.business.service.ReportProductOfferingService">
+		<constructor-arg ref="loanPrdBusinessService" />
+		<constructor-arg ref="savingsPrdBusinessService" />
+		<constructor-arg>
+			<value>
+				classpath:org/mifos/application/reports/resources/CollectionSheetReport.properties
+			</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="selectionItemPersistence"
+		class="org.mifos.application.reports.persistence.SelectionItemPersistence" />
+	<bean id="reportParameterService"
+		class="org.mifos.application.reports.business.service.ReportsParameterService">
+		<constructor-arg ref="selectionItemPersistence" />
+	</bean>
+	<bean id="cascadingReportParameterService"
+		class="org.mifos.application.reports.business.service.CascadingReportParameterService">
+		<constructor-arg
+			type="org.mifos.application.reports.business.service.IReportsParameterService"
+			ref="reportParameterServiceProxy" />
+		<constructor-arg ref="personnelBusinessService" />
+		<constructor-arg ref="customerBusinessService" />
+	</bean>
+	<bean id="reportParameterServiceProxy"
+		class="org.springmodules.cache.interceptor.proxy.CacheProxyFactoryBean">
+		<property name="cacheProviderFacade" ref="cacheProviderFacade" />
+		<property name="cachingModels">
+			<props>
+				<prop key="get*">
+					cacheName=org.mifos.application.reports.business.service.cache
+				</prop>
+			</props>
+		</property>
+		<property name="flushingModels">
+			<props>
+				<prop key="invalidate">
+					cacheNames=org.mifos.application.reports.business.service.cache
+				</prop>
+			</props>
+		</property>
+		<property name="target" ref="reportParameterService" />
+	</bean>
+	<bean id="defaultCollectionSheetReportService"
+		class="org.mifos.application.reports.business.service.CollectionSheetReportService">
+		<constructor-arg ref="collectionSheetService" />
+		<constructor-arg ref="officeBusinessService" />
+		<constructor-arg ref="accountBusinessService" />
+		<constructor-arg ref="reportProductOfferingService" />
+		<constructor-arg ref="cascadingReportParameterService" />
+	</bean>
+	<bean id="collectionSheetReportService" factory-method="decorate"
+		class="org.mifos.framework.business.service.ServiceDecoratorFactory">
+		<constructor-arg
+			type="org.mifos.application.reports.business.service.ICollectionSheetReportService"
+			ref="defaultCollectionSheetReportService" />
+		<constructor-arg>
+			<bean
+				class="org.mifos.framework.components.logger.ServiceActivityLogger">
+				<constructor-arg value="CollectionSheetReportService" />
+			</bean>
+		</constructor-arg>
+	</bean>
+	<bean name="branchReportConfigService"
+		class="org.mifos.application.reports.business.service.BranchReportConfigService">
+		<constructor-arg>
+			<value>
+				classpath:org/mifos/application/reports/resources/ProgressReport.properties
+			</value>
+		</constructor-arg>
+	</bean>
+	<bean name="hoCashConfirmationConfigService"
+		class="org.mifos.application.reports.business.service.HOCashConfirmationConfigService">
+		<constructor-arg>
+			<value>
+				classpath:org/mifos/application/reports/resources/HOCashConfirmationReport.properties
+			</value>
+		</constructor-arg>
+	</bean>
+	<bean name="cashConfirmationConfigService"
+		class="org.mifos.application.reports.business.service.CashConfirmationConfigService">
+		<constructor-arg>
+			<value>
+				classpath:org/mifos/application/reports/resources/BranchCashConfirmationReport.properties
+			</value>
+		</constructor-arg>
+	</bean>
+	<bean name="branchReportService"
+		class="org.mifos.application.reports.business.service.BranchReportService">
+		<constructor-arg ref="officeBusinessService" />
+		<constructor-arg ref="personnelBusinessService" />
+		<constructor-arg ref="branchReportPersistence" />
+	</bean>
+
+	<bean name="branchCashConfirmationReportService"
+		class="org.mifos.application.reports.business.service.BranchCashConfirmationReportService">
+		<constructor-arg ref="branchCashConfirmationReportPersistence" />
+		<constructor-arg ref="officeBusinessService" />
+	</bean>
+</beans>

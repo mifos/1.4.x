@@ -1,0 +1,249 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+	<session-factory>
+   
+		<!-- master data mapping files-->
+
+		<mapping resource="org/mifos/application/master/business/LookUpEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/accounts/business/AccountTypeEntity.hbm.xml" />
+
+		<mapping resource="org/mifos/application/checklist/business/CheckListBO.hbm.xml" />
+		<mapping resource="org/mifos/application/checklist/business/CheckListDetailEntity.hbm.xml" />
+		<mapping resource="org/mifos/framework/security/util/ActivityRoles.hbm.xml" />
+		<mapping resource="org/mifos/framework/security/util/officeSearch.hbm.xml" />
+		<mapping resource="org/mifos/framework/security/util/PersonalRoles.hbm.xml" />
+		<!-- Product Definition -->
+		<mapping resource="org/mifos/application/productdefinition/business/PrdCategoryStatusEntity.hbm.xml" />
+		<!-- Product Mix -->
+		<mapping resource="org/mifos/application/productsmix/business/ProductMixBO.hbm.xml" />	
+
+		<!-- Audit Log -->
+		<mapping resource="org/mifos/framework/components/fieldConfiguration/business/EntityMaster.hbm.xml" />
+		<mapping resource="org/mifos/framework/components/audit/business/AuditLog.hbm.xml" />
+		<mapping resource="org/mifos/framework/components/audit/business/AuditLogRecord.hbm.xml" />
+		<!-- Batch Jobs -->
+		<mapping resource="org/mifos/framework/components/batchjobs/business/Task.hbm.xml" />
+
+        <!-- M2 style objects importexport-->
+        <mapping resource="org/mifos/application/importexport/business/ImportedFilesEntity.hbm.xml" />
+
+		<!-- M2 style objects for office-->
+
+		<mapping resource="org/mifos/application/office/business/OfficeBO.hbm.xml" />
+		<mapping resource="org/mifos/application/office/business/OfficeAddressEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/office/business/OfficeLevelEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/office/business/OfficeStatusEntity.hbm.xml" />
+
+		<!-- M2 style objects for personnel-->
+
+		<mapping resource="org/mifos/application/personnel/business/PersonnelBO.hbm.xml" />
+		<mapping resource="org/mifos/application/personnel/business/PersonnelDetailsEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/personnel/business/PersonnelLevelEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/personnel/business/PersonnelMovementEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/personnel/business/PersonnelNotesEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/personnel/business/PersonnelRoleEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/personnel/business/PersonnelStatusEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/personnel/business/PersonnelCustomFieldEntity.hbm.xml" />
+
+		<!-- M2 style objects for customer-->
+
+		<mapping resource="org/mifos/application/customer/business/CustomerAddressDetailEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/customer/business/CustomerBO.hbm.xml" />
+		<mapping resource="org/mifos/application/customer/client/business/ClientDetailEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/customer/client/business/ClientFamilyDetailEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/customer/business/CustomerCustomFieldEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/customer/business/CustomerFlagDetailEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/customer/business/CustomerStatusFlagEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/customer/business/CustomerHierarchyEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/customer/business/CustomerHistoricalDataEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/customer/business/CustomerLevelEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/customer/business/CustomerMeetingEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/customer/business/CustomerMovementEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/customer/client/business/ClientNameDetailEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/customer/business/CustomerNoteEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/customer/business/CustomerPositionEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/customer/business/CustomerStatusEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/customer/business/PositionEntity.hbm.xml" />
+
+
+		<!-- M2 style objects for meeting-->
+
+		<mapping resource="org/mifos/application/meeting/business/MeetingBO.hbm.xml" />
+		<mapping resource="org/mifos/application/meeting/business/MeetingDetailsEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/meeting/business/MeetingRecurrenceEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/meeting/business/MeetingTypeEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/meeting/business/RankOfDaysEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/meeting/business/RecurrenceTypeEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/meeting/business/WeekDaysEntity.hbm.xml" />
+
+		<!-- M2 style objects for Product offering-->
+
+		<mapping resource="org/mifos/application/productdefinition/business/GracePeriodTypeEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/productdefinition/business/LoanOfferingFundEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/productdefinition/business/PrdOfferingBO.hbm.xml" />
+		<mapping resource="org/mifos/application/productdefinition/business/LoanOfferingFeesEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/productdefinition/business/PrdOfferingMeetingEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/productdefinition/business/PrdPmntTypeEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/productdefinition/business/PrdStateEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/productdefinition/business/PrdStatusEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/productdefinition/business/ProductCategoryBO.hbm.xml" />
+		<mapping resource="org/mifos/application/productdefinition/business/ProductTypeEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/productdefinition/business/SavingsTypeEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/productdefinition/business/InterestCalcTypeEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/productdefinition/business/RecommendedAmntUnitEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/productdefinition/business/PrdApplicableMasterEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/productdefinition/business/LoanAmountFromLastLoanAmountBO.hbm.xml" />
+		<mapping resource="org/mifos/application/productdefinition/business/NoOfInstallFromLastLoanAmountBO.hbm.xml" />
+		<mapping resource="org/mifos/application/productdefinition/business/LoanAmountFromLoanCycleBO.hbm.xml" />
+		<mapping resource="org/mifos/application/productdefinition/business/NoOfInstallFromLoanCycleBO.hbm.xml" />
+		<mapping resource="org/mifos/application/productdefinition/business/LoanAmountSameForAllLoanBO.hbm.xml" />
+		<mapping resource="org/mifos/application/productdefinition/business/NoOfInstallSameForAllLoanBO.hbm.xml" />
+			
+		<!--M2 style object for GLCODE-->
+		<mapping resource="org/mifos/application/accounts/financial/business/GLCodeEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/accounts/business/AccountBO.hbm.xml" />
+		<mapping resource="org/mifos/application/accounts/business/AccountCustomFieldEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/accounts/business/AccountFeesEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/accounts/business/AccountPaymentEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/accounts/business/AccountNotesEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/accounts/business/AccountTrxnEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/accounts/business/FeesTrxnDetailEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/accounts/loan/business/LoanSummaryEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/accounts/business/AccountStateFlagEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/accounts/business/AccountStateEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/accounts/financial/business/COABO.hbm.xml" />
+		<mapping resource="org/mifos/application/accounts/financial/business/COAHierarchyEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/accounts/financial/business/COAIDMapperEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/accounts/financial/business/FinancialActionBO.hbm.xml" />
+		<mapping resource="org/mifos/application/accounts/financial/business/FinancialTransactionBO.hbm.xml" />
+		<mapping resource="org/mifos/application/master/business/CustomerAttendance.hbm.xml" />
+		<mapping resource="org/mifos/application/fees/business/CategoryTypeEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/fees/business/FeeFormulaEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/fees/business/FeeFrequencyEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/fees/business/FeeFrequencyTypeEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/fees/business/FeeLevelEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/fees/business/FeePaymentEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/fees/business/FeePaymentsCategoriesTypeEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/fees/business/FeeBO.hbm.xml" />
+		<mapping resource="org/mifos/application/fees/business/FeeStatusEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/fees/business/FeeTypeEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/fees/business/ApplicableAccountsTypeEntity.hbm.xml" />
+
+		<!-- Mapping files for collection sheet generation-->
+		<mapping resource="org/mifos/application/collectionsheet/business/CollectionSheetBO.hbm.xml" />
+		<mapping resource="org/mifos/application/collectionsheet/business/CollSheetCustBO.hbm.xml" />
+		<mapping resource="org/mifos/application/collectionsheet/business/CollSheetLnDetailsEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/collectionsheet/business/CollSheetSavingsDetailsEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/reports/ui/SelectionItem.hbm.xml" />
+		<!--<mapping resource="org/mifos/application/reports/ui/DateSelectionItem.hbm.xml" />-->
+		<!-- Mapping files for Master Data -->
+		<mapping resource="org/mifos/application/master/business/MifosCurrency.hbm.xml" />
+		<mapping resource="org/mifos/application/master/business/CountryEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/master/business/LanguageEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/master/business/LookUpLabelEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/master/business/LookUpValueEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/master/business/LookUpValueLocaleEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/master/business/MifosLookUpEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/master/business/SupportedLocalesEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/master/business/PaymentTypeEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/master/business/SpouseFatherLookupEntity.hbm.xml" />
+        <mapping resource="org/mifos/application/master/business/CustomFieldDefinitionEntity.hbm.xml" />
+
+		<mapping resource="org/mifos/application/accounts/savings/business/SavingsPerformanceEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/accounts/business/AccountActionEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/customer/business/CustomerActivityEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/office/business/OfficeCustomFieldEntity.hbm.xml" />
+
+		<mapping resource="org/mifos/application/master/business/InterestTypesEntity.hbm.xml" />
+
+		<mapping resource="org/mifos/application/accounts/loan/business/LoanActivityEntity.hbm.xml" />
+
+		<mapping resource="org/mifos/application/accounts/business/AccountStatusChangeHistoryEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/accounts/business/AccountFlagMapping.hbm.xml" />
+
+		<!-- Mapping files for Reports -->
+		<mapping resource="org/mifos/application/reports/business/ReportsBO.hbm.xml" />
+		<mapping resource="org/mifos/application/reports/business/ReportsCategoryBO.hbm.xml" />
+		<mapping resource="org/mifos/application/reports/business/ReportsParams.hbm.xml" />
+		<mapping resource="org/mifos/application/reports/business/ReportsParamsValue.hbm.xml" />
+		<mapping resource="org/mifos/application/reports/business/ReportsDataSource.hbm.xml" />
+		<mapping resource="org/mifos/application/reports/business/ReportsParamsMapValue.hbm.xml" />
+		<mapping resource="org/mifos/application/reports/business/ReportsParamsMap.hbm.xml" />
+		<mapping resource="org/mifos/application/reports/business/ReportsJasperMap.hbm.xml" />
+		<!-- End mapping files for reports -->
+		
+		<mapping resource="org/mifos/application/customer/client/business/ClientAttendance.hbm.xml" />
+
+		<mapping resource="org/mifos/framework/components/fieldConfiguration/business/FieldConfigurationEntity.hbm.xml" />
+
+		<!--Configuration-->
+		<mapping resource="org/mifos/framework/components/configuration/business/ConfigurationKeyValueInteger.hbm.xml" />
+
+		<mapping resource="org/mifos/application/accounts/savings/business/SavingsActivityEntity.hbm.xml" />
+
+		<!-- Mapping files for performace history-->
+		<mapping resource="org/mifos/application/accounts/loan/business/LoanPerformanceHistoryEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/customer/group/business/GroupPerformanceHistoryEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/customer/client/business/ClientPerformanceHistoryEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/customer/client/business/LoanCounter.hbm.xml" />
+		<mapping resource="org/mifos/application/customer/group/business/GroupLoanCounter.hbm.xml" />
+
+
+		<mapping resource="org/mifos/application/accounts/loan/business/LoanScheduleEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/accounts/savings/business/SavingsScheduleEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/customer/business/CustomerScheduleEntity.hbm.xml" />
+
+		<mapping resource="org/mifos/application/accounts/loan/business/LoanFeeScheduleEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/accounts/loan/business/LoanArrearsAgingEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/customer/business/CustomerFeeScheduleEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/customer/client/business/CustomerPictureEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/customer/client/business/ClientInitialSavingsOfferingEntity.hbm.xml" />
+
+		<mapping resource="org/mifos/application/rolesandpermission/business/ActivityEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/rolesandpermission/business/RoleActivityEntity.hbm.xml" />
+		<mapping resource="org/mifos/application/rolesandpermission/business/RoleBO.hbm.xml" />
+		<mapping resource="org/mifos/application/fund/business/FundBO.hbm.xml" />
+		<mapping resource="org/mifos/application/master/business/FundCodeEntity.hbm.xml" />
+
+        <mapping resource="org/mifos/application/holiday/business/HolidayBO.hbm.xml" />
+    	<mapping resource="org/mifos/application/holiday/business/RepaymentRuleEntity.hbm.xml" />
+    	
+    	<mapping resource="org/mifos/application/surveys/business/SurveyInstance.hbm.xml"/>  
+    	<mapping resource="org/mifos/application/surveys/business/Survey.hbm.xml"/>  
+    	<mapping resource="org/mifos/application/surveys/business/Question.hbm.xml"/>      	
+    	<mapping resource="org/mifos/application/surveys/business/QuestionChoice.hbm.xml"/>      	
+     	<mapping resource="org/mifos/application/surveys/business/SurveyResponse.hbm.xml"/>  
+    	<mapping resource="org/mifos/application/surveys/business/SurveyQuestion.hbm.xml"/>
+    	<mapping resource="org/mifos/application/ppi/business/PPILikelihood.hbm.xml"/>
+    	<mapping resource="org/mifos/application/acceptedpaymenttype/business/AcceptedPaymentType.hbm.xml" />
+		<mapping resource="org/mifos/application/acceptedpaymenttype/business/TransactionTypeEntity.hbm.xml" />
+			 
+		<mapping resource="org/mifos/application/accounts/loan/business/MaxMinLoanAmount.hbm.xml" />
+		<mapping resource="org/mifos/application/accounts/loan/business/MaxMinNoOfInstall.hbm.xml" />		 
+		
+		<!-- Administratives Documents  -->
+		<mapping resource="org/mifos/application/admindocuments/business/AdminDocAccStateMix.hbm.xml" />
+		<mapping resource="org/mifos/application/admindocuments/business/AdminDocument.hbm.xml" />
+		<!--  -->
+		
+		<!-- Branch Report -->
+		<mapping resource="org/mifos/application/branchreport/BranchReportBO.hbm.xml" />				
+		<mapping resource="org/mifos/application/branchreport/BranchReportClientSummaryBO.hbm.xml" />		
+		<mapping resource="org/mifos/application/branchreport/BranchReportLoanArrearsAgingBO.hbm.xml" />		
+		<mapping resource="org/mifos/application/branchreport/BranchReportStaffSummaryBO.hbm.xml" />		
+		<mapping resource="org/mifos/application/branchreport/BranchReportStaffingLevelSummaryBO.hbm.xml" />		
+		<mapping resource="org/mifos/application/branchreport/BranchReportLoanDetailsBO.hbm.xml" />		
+		<mapping resource="org/mifos/application/branchreport/BranchReportLoanArrearsProfileBO.hbm.xml" />	
+		
+		<!--  Branch Cash Confirmation Report -->	
+		<mapping resource="org/mifos/application/cashconfirmationreport/BranchCashConfirmationReportBO.hbm.xml" />	
+		<mapping resource="org/mifos/application/cashconfirmationreport/BranchCashConfirmationCenterRecoveryBO.hbm.xml" />	
+		<mapping resource="org/mifos/application/cashconfirmationreport/BranchCashConfirmationInfoBO.hbm.xml" />	
+		
+	</session-factory>
+
+</hibernate-configuration>
