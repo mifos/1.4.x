@@ -6,8 +6,23 @@ set -o errexit
 sourceDir=$1
 targetDir=$2
 
-for localeDir in `find $sourceDir -mindepth 1 -maxdepth 1 \
-    -regex '[^.]*/[a-zA-Z_]+$' -type d`
+if [ -z "$sourceDir" ] || [ -z "$targetDir" ]; then
+    echo "Usage: $0 SOURCE_DIR TARGET_DIR"
+    exit 1
+fi
+
+if [ ! -d $targetDir ] || [ ! -d $sourceDir ]; then
+    echo "ERROR: SOURCE_DIR and TARGET_DIR must both be directories"
+    exit 1
+fi
+
+localeDirs=`find $sourceDir -mindepth 1 -maxdepth 1 -regex '.*/[a-zA-Z_]+$' -type d`
+if [ -z "$localeDirs" ]; then
+    echo "ERROR: no locale directories found in $sourceDir"
+    exit 1
+fi
+
+for localeDir in $localeDirs
 do
     locale=`basename $localeDir`
     for translated in `find $localeDir -type f -name "*.po"`
@@ -23,3 +38,8 @@ do
             $translated $targetDir/${bundleBase}_$locale.properties
     done
 done
+
+if ! find $targetDir -type f | grep --quiet .; then
+    echo "ERROR: no translations found in $targetDir. Template Toolkit probably failed."
+    exit 1
+fi
