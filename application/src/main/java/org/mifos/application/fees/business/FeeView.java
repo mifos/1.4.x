@@ -47,6 +47,8 @@ public class FeeView extends View {
     private String feeFormula;
 
     private Short localeId;
+    
+    private RateAmountFlag feeType;
 
     private RecurrenceType frequencyType;
 
@@ -57,6 +59,7 @@ public class FeeView extends View {
         if (userContext != null)
             localeId = userContext.getLocaleId();
         this.feeId = fee.getFeeId().toString();
+        this.setFeeType(fee.getFeeType());
         this.feeName = fee.getFeeName();
         if (fee.getFeeType().equals(RateAmountFlag.AMOUNT)) {
             this.amount = ((AmountFeeBO) fee).getFeeAmount().toString();
@@ -138,6 +141,14 @@ public class FeeView extends View {
 
     public Short getLocaleId() {
         return localeId;
+    }
+
+    public void setFeeType(RateAmountFlag feeType) {
+        this.feeType = feeType;
+    }
+
+    public RateAmountFlag getFeeType() {
+        return feeType;
     }
 
     public RecurrenceType getFrequencyType() {

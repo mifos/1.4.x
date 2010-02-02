@@ -38,7 +38,9 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.actions.DispatchAction;
 import org.hibernate.HibernateException;
 import org.mifos.application.login.util.helpers.LoginConstants;
+import org.mifos.application.master.MessageLookup;
 import org.mifos.application.master.business.MasterDataEntity;
+import org.mifos.application.master.business.MifosCurrency;
 import org.mifos.application.master.business.service.MasterDataService;
 import org.mifos.application.master.persistence.MasterPersistence;
 import org.mifos.application.util.helpers.ActionForwards;
@@ -302,15 +304,6 @@ public abstract class BaseAction extends DispatchAction {
                 .getDoubleValueForCurrentLocale(str) : null;
     }
 
-    protected Money getMoney(String str) {
-        return FormUtils.getMoney(str);
-    }
-
-    protected String getStringValue(Double value) {
-        return value != null ? String.valueOf(value) : null;
-
-    }
-
     protected String getStringValue(Integer value) {
         return value != null ? String.valueOf(value) : null;
     }
@@ -331,11 +324,11 @@ public abstract class BaseAction extends DispatchAction {
     }
 
     protected String getDoubleStringForMoney(Double dNumber) {
-        return new LocalizationConverter().getDoubleStringForMoney(dNumber);
+        return dNumber != null ? new LocalizationConverter().getDoubleStringForMoney(dNumber): null;
     }
 
     protected String getDoubleStringForInterest(Double dNumber) {
-        return new LocalizationConverter().getDoubleStringForInterest(dNumber);
+        return dNumber != null ? new LocalizationConverter().getDoubleStringForInterest(dNumber): null;
     }
 
     protected Date getDateFromString(String strDate, Locale locale) throws InvalidDateException {
@@ -396,4 +389,9 @@ public abstract class BaseAction extends DispatchAction {
         return mapping.findForward(ActionForwards.welcome.toString());
     }
 
+    protected String localizedMessageLookup(String key) {
+        return MessageLookup.getInstance().lookup(key);
+    }
+    
+    
 }

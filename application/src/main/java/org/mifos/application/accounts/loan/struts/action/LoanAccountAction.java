@@ -1430,7 +1430,7 @@ public class LoanAccountAction extends AccountAppAction {
     private void setDataIntoForm(final LoanOfferingBO loanOffering, final LoanAccountActionForm loanAccountActionForm,
             final HttpServletRequest request) throws Exception {
         updateForm(loanOffering, loanAccountActionForm);
-        loanAccountActionForm.setInterestRate(getStringValue(loanOffering.getDefInterestRate()));
+        loanAccountActionForm.setInterestRate(getDoubleStringForInterest(loanOffering.getDefInterestRate()));
         loanAccountActionForm.setIntDedDisbursement(getStringValue(loanOffering.isIntDedDisbursement()));
         loanAccountActionForm.setGracePeriodDuration(getStringValue(loanOffering.getGracePeriodDuration()));
         loanAccountActionForm.setDisbursementDate(DateUtils.getUserLocaleDate(getUserContext(request)
@@ -1442,7 +1442,7 @@ public class LoanAccountAction extends AccountAppAction {
         LoanAmountOption eligibleLoanAmount = loanOffering.eligibleLoanAmount(customer.getMaxLoanAmount(loanOffering),
                 customer.getMaxLoanCycleForProduct(loanOffering));
         loanAccountActionForm.setLoanAmountRange(eligibleLoanAmount);
-        loanAccountActionForm.setLoanAmount(getStringValue(eligibleLoanAmount.getDefaultLoanAmount()));
+        loanAccountActionForm.setLoanAmount(getDoubleStringForMoney(eligibleLoanAmount.getDefaultLoanAmount()));
         LoanOfferingInstallmentRange eligibleNoOfInstall = loanOffering.eligibleNoOfInstall(customer
                 .getMaxLoanAmount(loanOffering), customer.getMaxLoanCycleForProduct(loanOffering));
         loanAccountActionForm.setInstallmentRange(eligibleNoOfInstall);
@@ -1548,7 +1548,7 @@ public class LoanAccountAction extends AccountAppAction {
             loanAccountActionForm.setCollateralTypeId(getStringValue(loan.getCollateralTypeId()));
         }
         loanAccountActionForm.setCollateralNote(loan.getCollateralNote());
-        loanAccountActionForm.setInterestRate(getStringValue(loan.getInterestRate()));
+        loanAccountActionForm.setInterestRate(getDoubleStringForInterest(loan.getInterestRate()));
         loanAccountActionForm.setNoOfInstallments(getStringValue(loan.getNoOfInstallments()));
         loanAccountActionForm.setGracePeriodDuration(getStringValue(loan.getGracePeriodDuration()));
         loanAccountActionForm.setCustomFields(createCustomFieldViews(loan.getAccountCustomFields(), request));

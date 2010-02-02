@@ -154,8 +154,8 @@ public class LoanAccountActionEasyMockTest extends TestCase {
         AmountFeeBO mockFee = createMock(AmountFeeBO.class);
         expect(mockFee.getFeeId()).andReturn((short) 3).anyTimes();
         expect(mockFee.getFeeName()).andReturn("Fee3");
-        expect(mockFee.getFeeType()).andReturn(RateAmountFlag.AMOUNT);
-        expect(mockFee.getFeeAmount()).andReturn(feeAmount);
+        expect(mockFee.getFeeType()).andReturn(RateAmountFlag.AMOUNT).anyTimes();
+        expect(mockFee.getFeeAmount()).andReturn(feeAmount).anyTimes();
         expect(mockFee.isPeriodic()).andReturn(isPeriodic).anyTimes();
         if (isPeriodic) {
             FeeFrequencyEntity mockFeeFrequencyEntity = createMock(FeeFrequencyEntity.class);
