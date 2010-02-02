@@ -148,8 +148,8 @@ public class LoanAccountActionEasyMockTest extends TestCase {
 
     private AmountFeeBO createMockAmountFeeBO(Short feeId, String feeName, String feeAmountString, boolean isPeriodic,
             MeetingBO meeting) {
-        Money feeAmount = new Money(new MifosCurrency((short) 1, "USD", "USD", (short) 1, Float.valueOf(1), (short) 1,
-                (short) 1, "USD"), feeAmountString);
+        Money feeAmount = new Money(new MifosCurrency((short) 1, "INR", "INR", (short) 1, Float.valueOf(1), (short) 1,
+                (short) 1, "INR"), feeAmountString);
 
         AmountFeeBO mockFee = createMock(AmountFeeBO.class);
         expect(mockFee.getFeeId()).andReturn((short) 3).anyTimes();

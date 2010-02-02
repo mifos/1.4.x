@@ -595,8 +595,8 @@ public class LoanAccountAction extends AccountAppAction {
                 .getLocaleId());
         setDataIntoForm(loanOffering, loanActionForm, request);
         loadCreateMasterData(loanActionForm, request);
-        MeetingDetailsEntity loanMeetingDetail = loanOffering.getLoanOfferingMeeting().getMeeting().getMeetingDetails();
-        RecurrenceType recurrenceType = loanMeetingDetail.getRecurrenceTypeEnum();
+        MeetingDetailsEntity loanOfferingMeetingDetail = loanOffering.getLoanOfferingMeeting().getMeeting().getMeetingDetails();
+        RecurrenceType recurrenceType = loanOfferingMeetingDetail.getRecurrenceTypeEnum();
 
         SessionUtils.setAttribute(RECURRENCEID, recurrenceType.getValue(), request);
         request.setAttribute(RECURRENCEID, recurrenceType.getValue());
@@ -609,10 +609,10 @@ public class LoanAccountAction extends AccountAppAction {
             customerBO = (CustomerBO) SessionUtils.getAttribute(LOANACCOUNTOWNER, request);
 
         }
-        MeetingDetailsEntity meetingDetails = customerBO.getCustomerMeeting().getMeeting().getMeetingDetails();
 
         if (configService.isRepaymentIndepOfMeetingEnabled()) {
-            setRepaymentDayFieldsOnForm(loanActionForm, loanMeetingDetail);
+            setRepaymentDayFieldsOnFormForLoad(loanActionForm, loanOfferingMeetingDetail, 
+                    customerBO.getCustomerMeeting().getMeeting().getMeetingDetails());
         }
 
         SessionUtils.removeAttribute(LOANOFFERING, request);
@@ -624,6 +624,18 @@ public class LoanAccountAction extends AccountAppAction {
         return mapping.findForward(ActionForwards.load_success.toString());
     }
 
+    private void setRepaymentDayFieldsOnFormForLoad(LoanAccountActionForm loanActionForm, MeetingDetailsEntity meetingDetail, 
+            MeetingDetailsEntity customerMeetingDetail) {
+        loanActionForm.setMonthDay("");
+        loanActionForm.setMonthWeek("0");
+        loanActionForm.setMonthRank("0");
+        if (meetingDetail.getRecurrenceTypeEnum() == RecurrenceType.MONTHLY) {
+            setMonthlySchedule(loanActionForm, meetingDetail);
+        } else {
+            setWeeklySchedule(loanActionForm, customerMeetingDetail);
+        }
+    }
+    
     public ActionForward redoLoanBegin(final ActionMapping mapping, final ActionForm form, final HttpServletRequest request,
             final HttpServletResponse response) throws Exception {
         return mapping.findForward(ActionForwards.beginRedoLoanDisbursal_success.toString());
