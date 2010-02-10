@@ -210,7 +210,7 @@ public class AccountBusinessService implements BusinessService {
                 applicableCharge.setFormula(((RateFeeBO) fee).getFeeFormula().getFormulaString(
                         userContext.getLocaleId()));
             } else {
-                applicableCharge.setAmountOrRate(((AmountFeeBO) fee).getFeeAmount().getAmount().toString());
+                applicableCharge.setAmountOrRate(((AmountFeeBO) fee).getFeeAmount().toString());
             }
             MeetingBO meeting = fee.getFeeFrequency().getFeeMeetingFrequency();
             if (meeting != null) {
