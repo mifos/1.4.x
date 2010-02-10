@@ -78,7 +78,6 @@ import org.mifos.framework.security.util.UserContext;
 import org.mifos.framework.struts.action.BaseAction;
 import org.mifos.framework.util.helpers.BusinessServiceName;
 import org.mifos.framework.util.helpers.Constants;
-import org.mifos.framework.util.helpers.Money;
 import org.mifos.framework.util.helpers.SessionUtils;
 import org.mifos.framework.util.helpers.TransactionDemarcate;
 import org.mifos.framework.util.helpers.Transformer;
@@ -309,7 +308,7 @@ public class MultipleLoanAccountsCreationAction extends BaseAction {
                         return new MultipleLoanCreationViewHelper(client, loanOffering.eligibleLoanAmount(client
                                 .getMaxLoanAmount(loanOffering), client.getMaxLoanCycleForProduct(loanOffering)),
                                 loanOffering.eligibleNoOfInstall(client.getMaxLoanAmount(loanOffering), client
-                                        .getMaxLoanCycleForProduct(loanOffering)),Money.getDefaultCurrency());
+                                        .getMaxLoanCycleForProduct(loanOffering)));
                     }
                 });
     }

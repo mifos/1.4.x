@@ -52,7 +52,7 @@ public class MultipleLoanCreationViewHelperTest {
 
     @Before
     public void setUp(){
-        multipleLoanCreationViewHelper = new MultipleLoanCreationViewHelper(client,loanAmountOption,installmentOption,TestUtils.RUPEE);
+        multipleLoanCreationViewHelper = new MultipleLoanCreationViewHelper(client,loanAmountOption,installmentOption);
     }
 
     @After

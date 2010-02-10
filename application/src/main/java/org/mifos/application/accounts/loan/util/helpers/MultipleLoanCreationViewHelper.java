@@ -25,7 +25,6 @@ import static org.mifos.framework.util.helpers.NumberUtils.*;
 
 import org.apache.commons.lang.StringUtils;
 import org.mifos.application.customer.client.business.ClientBO;
-import org.mifos.application.master.business.MifosCurrency;
 import org.mifos.application.productdefinition.business.LoanAmountOption;
 import org.mifos.application.productdefinition.business.LoanOfferingInstallmentRange;
 import org.mifos.framework.util.helpers.Money;
@@ -43,21 +42,18 @@ public class MultipleLoanCreationViewHelper {
     private ClientBO client;
 
     private String selected;
-    
-    private MifosCurrency currency;
 
     public MultipleLoanCreationViewHelper(ClientBO client, LoanAmountOption loanAmountOption,
-            LoanOfferingInstallmentRange installmentOption, MifosCurrency currency) {
+            LoanOfferingInstallmentRange installmentOption) {
         super();
         this.client = client;
         this.loanAmountOption = loanAmountOption;
         this.installmentOption = installmentOption;
         this.loanAmount = getDefaultLoanAmount().toString();
-        this.currency = currency;
     }
 
     public MultipleLoanCreationViewHelper() {
-        this(null, null, null, null);
+        this(null, null, null);
     }
 
     public String getBusinessActivity() {
@@ -93,24 +89,21 @@ public class MultipleLoanCreationViewHelper {
     // make those double argument as Money or BigDecimal. this workaround is added
     // to fix MIFOS-2698
     public Money getMinLoanAmount() {
-        return loanAmountOption == null ? new Money(getCurrency(),"0") : new Money(getCurrency(), loanAmountOption
-                        .getMinLoanAmount().toString());
+        return loanAmountOption == null ? new Money() : new Money(loanAmountOption.getMinLoanAmount().toString());
     }
 
     // FIXME: Loan are created using double, the better way to do this would be to
     // make those double argument as Money or BigDecimal. this workaround is added
     // to fix MIFOS-2698
     public Money getMaxLoanAmount() {
-        return loanAmountOption == null ? new Money(getCurrency(), "0") : new Money(getCurrency(), loanAmountOption
-                .getMaxLoanAmount().toString());
+        return loanAmountOption == null ? new Money() : new Money(loanAmountOption.getMaxLoanAmount().toString());
     }
 
     // FIXME: Loan are created using double, the better way to do this would be to
     // make those double argument as Money or BigDecimal. this workaround is added
     // to fix MIFOS-2698
     public Money getDefaultLoanAmount() {
-        return loanAmountOption == null ? new Money(getCurrency(), "0") : new Money(getCurrency(), loanAmountOption
-                .getDefaultLoanAmount().toString());
+        return loanAmountOption == null ? new Money() : new Money(loanAmountOption.getDefaultLoanAmount().toString());
     }
 
     public Short getDefaultNoOfInstall() {
@@ -143,9 +136,5 @@ public class MultipleLoanCreationViewHelper {
 
     public void resetSelected() {
         this.selected = Boolean.FALSE.toString();
-    }
-
-    public MifosCurrency getCurrency() {
-        return currency;
     }
 }
