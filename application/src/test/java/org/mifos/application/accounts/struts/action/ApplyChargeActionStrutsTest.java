@@ -66,6 +66,11 @@ public class ApplyChargeActionStrutsTest extends MifosMockStrutsTestCase {
 
     private String flowKey;
 
+    // for constructing the ChargeType member
+    private static final String FEE_ID = "-1";
+    private static final String IS_RATE_TYPE = "1";
+    private static final String IS_NOT_RATE_TYPE = "0";
+    
     @Override
     protected void setUp() throws Exception {
         super.setUp();
@@ -126,7 +131,7 @@ public class ApplyChargeActionStrutsTest extends MifosMockStrutsTestCase {
         accountBO = getLoanAccount(client, meeting);
         setRequestPathInfo("/applyChargeAction.do");
         addRequestParameter("method", "update");
-        addRequestParameter("chargeType", "-1");
+        addRequestParameter("chargeType", FEE_ID + ":" + IS_NOT_RATE_TYPE);
         addRequestParameter("charge", "18");
         addRequestParameter("accountId", accountBO.getAccountId().toString());
         addRequestParameter(Constants.CURRENTFLOWKEY, (String) request.getAttribute(Constants.CURRENTFLOWKEY));
@@ -143,7 +148,7 @@ public class ApplyChargeActionStrutsTest extends MifosMockStrutsTestCase {
         accountBO = getLoanAccount(client, meeting);
         setRequestPathInfo("/applyChargeAction.do");
         addRequestParameter("method", "update");
-        addRequestParameter("chargeType", "-1");
+        addRequestParameter("chargeType", FEE_ID + ":" + IS_NOT_RATE_TYPE);
         addRequestParameter("charge", "12345678.21");
         addRequestParameter("accountId", accountBO.getAccountId().toString());
         addRequestParameter(Constants.CURRENTFLOWKEY, (String) request.getAttribute(Constants.CURRENTFLOWKEY));
@@ -160,7 +165,7 @@ public class ApplyChargeActionStrutsTest extends MifosMockStrutsTestCase {
         accountBO = getLoanAccount(client, meeting);
         setRequestPathInfo("/applyChargeAction.do");
         addRequestParameter("method", "update");
-        addRequestParameter("chargeType", "-1");
+        addRequestParameter("chargeType", FEE_ID + ":" + IS_RATE_TYPE);
         addRequestParameter("chargeAmount", "999999");
         addRequestParameter("selectedChargeFormula", "%LoanAmount");
         addRequestParameter("charge", "18");

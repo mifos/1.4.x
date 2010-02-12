@@ -204,7 +204,7 @@ public class AccountServiceIntegrationTest extends MifosIntegrationTestCase {
        Assert.assertEquals(4, applicableChargeList.size());
         for (ApplicableCharge applicableCharge : applicableChargeList) {
             if (applicableCharge.getFeeName().equalsIgnoreCase("Upfront Fee")) {
-               Assert.assertEquals(new Money("20.0"), new Money(applicableCharge.getAmountOrRate()));
+               Assert.assertEquals(new Money("20"), new Money(applicableCharge.getAmountOrRate()));
                 Assert.assertNotNull(applicableCharge.getFormula());
                 Assert.assertNull(applicableCharge.getPeriodicity());
             } else if (applicableCharge.getFeeName().equalsIgnoreCase("Periodic Fee")) {
@@ -236,7 +236,7 @@ public class AccountServiceIntegrationTest extends MifosIntegrationTestCase {
        Assert.assertEquals(6, applicableChargeList.size());
         for (ApplicableCharge applicableCharge : applicableChargeList) {
             if (applicableCharge.getFeeName().equalsIgnoreCase("Upfront Fee")) {
-               Assert.assertEquals(new Money("20.0").toString(), applicableCharge.getAmountOrRate());
+               Assert.assertEquals("20", applicableCharge.getAmountOrRate());
                 Assert.assertNotNull(applicableCharge.getFormula());
                 Assert.assertNull(applicableCharge.getPeriodicity());
             } else if (applicableCharge.getFeeName().equalsIgnoreCase("Periodic Fee")) {
@@ -266,7 +266,7 @@ public class AccountServiceIntegrationTest extends MifosIntegrationTestCase {
        Assert.assertEquals(4, applicableChargeList.size());
         for (ApplicableCharge applicableCharge : applicableChargeList) {
             if (applicableCharge.getFeeName().equalsIgnoreCase("Upfront Fee")) {
-               Assert.assertEquals(new Money("20.0").toString(), applicableCharge.getAmountOrRate());
+               Assert.assertEquals("20", applicableCharge.getAmountOrRate());
                 Assert.assertNotNull(applicableCharge.getFormula());
                 Assert.assertNull(applicableCharge.getPeriodicity());
             } else if (applicableCharge.getFeeName().equalsIgnoreCase("Misc Fee")) {
