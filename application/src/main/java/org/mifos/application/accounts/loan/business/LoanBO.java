@@ -1742,7 +1742,11 @@ public class LoanBO extends AccountBO {
     }
 
     private Short getInstallmentSkipToStartRepayment(final boolean isRepaymentIndepOfMeetingEnabled) {
-        boolean isInterestDeductedatDisbursement = false;
+        /* TODO: if interest deducted at disbursement is re-enabled, then we need
+         * to figure out why this logic was here.  This logic broke grace period
+         * functionality in normal loan cases and was removed as part of MIFOS-1994
+         *
+        boolean isInterestDeductedatDisbursement = isInterestDeductedAtDisbursement();
         if (isRepaymentIndepOfMeetingEnabled) {
             isInterestDeductedatDisbursement = !isInterestDeductedAtDisbursement();
         } else {
@@ -1750,12 +1754,23 @@ public class LoanBO extends AccountBO {
         }
         if (isInterestDeductedatDisbursement) {
             return (short) 0;
-        } else {
-            if (getGraceType() == GraceType.PRINCIPALONLYGRACE || getGraceType() == GraceType.NONE) {
-                return (short) 1;
-            }
+        }        
+        */
+        
+        // in the default case of loan schedules tied to meeting schedules,
+        // the loan is disbursed at the first meeting (#0) and the first
+        // payment is made at the following meeting (#1)
+        short firstRepaymentInstallment = 1;
+        // if LoanScheduleIndependentofMeeting is on, then repayments start on 
+        // the first meeting in the schedule (#0)
+        if (isRepaymentIndepOfMeetingEnabled) {
+            firstRepaymentInstallment = 0;
         }
-        return (short) (getGracePeriodDuration() + 1);
+
+        if (getGraceType() == GraceType.PRINCIPALONLYGRACE || getGraceType() == GraceType.NONE) {
+            return (short) firstRepaymentInstallment;
+        }
+        return (short) (getGracePeriodDuration() + firstRepaymentInstallment);
     }
 
     private String getRateBasedOnFormula(final Double rate, final FeeFormulaEntity formula, final Money loanInterest) {
