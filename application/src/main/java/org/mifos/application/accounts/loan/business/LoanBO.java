@@ -316,12 +316,12 @@ public class LoanBO extends AccountBO {
             final CustomerBO customer, final AccountState accountState, final Money loanAmount, final Short noOfinstallments,
             final Date disbursementDate, final boolean interestDeductedAtDisbursement, final boolean isRepaymentIndepOfMeetingEnabled,
             final Double interestRate, final Short gracePeriodDuration, final FundBO fund, final List<FeeView> feeViews,
-            final List<CustomFieldView> customFields) throws AccountException {
+            final List<CustomFieldView> customFields, boolean isUpdate) throws AccountException {
 
         commonValidationsForCreateAndRedoIndividualLoans(loanOffering, customer, loanAmount, noOfinstallments,
                 disbursementDate, interestRate, isRepaymentIndepOfMeetingEnabled, interestDeductedAtDisbursement);
 
-        if (isDisbursementDateLessThanCurrentDate(disbursementDate)) {
+        if (!isUpdate && isDisbursementDateLessThanCurrentDate(disbursementDate)) {
             throw new AccountException(LoanExceptionConstants.ERROR_INVALIDDISBURSEMENTDATE);
         }
 

@@ -152,7 +152,7 @@ public class LoanBOTestUtils {
         try {
             loan = LoanBO.createIndividualLoan(TestUtils.makeUser(), loanOfering, customer, state, new Money(currency,
                     "300.0"), Short.valueOf("6"), meetingDates.get(0), false, false, 0.0, (short) 0, new FundBO(),
-                    new ArrayList<FeeView>(), null);
+                    new ArrayList<FeeView>(), null, false);
         } catch (ApplicationException e) {
             throw new RuntimeException(e);
         }
