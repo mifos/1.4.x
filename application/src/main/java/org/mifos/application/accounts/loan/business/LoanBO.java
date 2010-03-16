@@ -890,7 +890,7 @@ public class LoanBO extends AccountBO {
      */
     @Deprecated
     public void disburseLoan(final String receiptNum, final Date transactionDate, final Short paymentTypeId, final PersonnelBO personnel,
-            final Date receiptDate, final Short rcvdPaymentTypeId) throws AccountException {
+            final Date receiptDate, final Short rcvdPaymentTypeId) throws AccountException, PersistenceException {
         disburseLoan(receiptNum, transactionDate, paymentTypeId, personnel, receiptDate, rcvdPaymentTypeId, true);
     }
 
@@ -899,12 +899,12 @@ public class LoanBO extends AccountBO {
      */
     @Deprecated
     public void disburseLoan(final PersonnelBO personnel, final Short rcvdPaymentTypeId, final boolean persistChange)
-            throws AccountException {
+            throws AccountException, PersistenceException {
         disburseLoan(null, getDisbursementDate(), rcvdPaymentTypeId, personnel, null, rcvdPaymentTypeId, persistChange);
     }
 
     private void disburseLoan(final String receiptNum, final Date transactionDate, final Short paymentTypeId, final PersonnelBO personnel,
-            final Date receiptDate, final Short rcvdPaymentTypeId, final boolean persistChange) throws AccountException {
+            final Date receiptDate, final Short rcvdPaymentTypeId, final boolean persistChange) throws AccountException, PersistenceException {
 
         addLoanActivity(buildLoanActivity(this.loanAmount, personnel, AccountConstants.LOAN_DISBURSAL, transactionDate));
 
@@ -913,7 +913,7 @@ public class LoanBO extends AccountBO {
         if (!DateUtils.getDateWithoutTimeStamp(disbursementDate.getTime()).equals(
                 DateUtils.getDateWithoutTimeStamp(transactionDate.getTime()))) {
             this.disbursementDate = transactionDate;
-            regeneratePaymentSchedule(false, null);
+            regeneratePaymentSchedule(getConfigurationPersistence().isRepaymentIndepOfMeetingEnabled(), null); 
         }
         this.disbursementDate = transactionDate;
         final AccountStateEntity newState = new AccountStateEntity(AccountState.LOAN_ACTIVE_IN_GOOD_STANDING);
@@ -971,7 +971,7 @@ public class LoanBO extends AccountBO {
     }
 
     public void disburseLoan(final AccountPaymentEntity disbursalPayment, final Money feesAtDisbursement)
-            throws AccountException {
+            throws AccountException, PersistenceException {
         disburseLoan(disbursalPayment.getReceiptNumber(), disbursalPayment.getPaymentDate(), disbursalPayment
                 .getPaymentType().getId(), disbursalPayment.getCreatedByUser(), disbursalPayment.getReceiptDate(),
                 disbursalPayment.getPaymentType().getId(), false);

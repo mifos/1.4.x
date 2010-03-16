@@ -62,6 +62,7 @@ import org.mifos.framework.components.logger.LoggerConstants;
 import org.mifos.framework.components.logger.MifosLogManager;
 import org.mifos.framework.components.logger.MifosLogger;
 import org.mifos.framework.exceptions.PageExpiredException;
+import org.mifos.framework.exceptions.PersistenceException;
 import org.mifos.framework.security.util.ActionSecurity;
 import org.mifos.framework.security.util.SecurityConstants;
 import org.mifos.framework.security.util.UserContext;
@@ -258,7 +259,7 @@ public class CollectionSheetEntryAction extends BaseAction {
 
     @TransactionDemarcate(validateAndResetToken = true)
     public ActionForward create(final ActionMapping mapping, final ActionForm form, final HttpServletRequest request,
-            final HttpServletResponse response) throws PageExpiredException {
+            final HttpServletResponse response) throws PageExpiredException, PersistenceException {
 
         logTrackingInfo("create", request, form);
         final BulkEntryActionForm collectionSheetActionForm = (BulkEntryActionForm) form;

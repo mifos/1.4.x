@@ -42,6 +42,7 @@ import org.mifos.application.meeting.business.MeetingBO;
 import org.mifos.application.productdefinition.business.LoanOfferingBO;
 import org.mifos.framework.MifosIntegrationTestCase;
 import org.mifos.framework.exceptions.ApplicationException;
+import org.mifos.framework.exceptions.PersistenceException;
 import org.mifos.framework.exceptions.SystemException;
 import org.mifos.framework.hibernate.helper.StaticHibernateUtil;
 import org.mifos.framework.security.util.UserContext;
@@ -115,7 +116,7 @@ public class LoanBOForReversalIntegrationTest extends MifosIntegrationTestCase {
                 numberOfTransactions <= 8);
     }
 
-    private void disburseLoan() throws AccountException {
+    private void disburseLoan() throws AccountException, NumberFormatException, PersistenceException {
         long transactionCount = getStatisticsService().getSuccessfulTransactionCount();
         loan.setUserContext(userContext);
         loan.disburseLoan("4534", new Date(), Short.valueOf("1"), group.getPersonnel(), new Date(), Short.valueOf("1"));

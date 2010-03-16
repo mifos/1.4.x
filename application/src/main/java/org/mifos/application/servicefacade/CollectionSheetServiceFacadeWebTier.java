@@ -252,7 +252,7 @@ public class CollectionSheetServiceFacadeWebTier implements CollectionSheetServi
 
     public CollectionSheetErrorsView saveCollectionSheet(
             final CollectionSheetEntryGridDto previousCollectionSheetEntryDto,
-            final CollectionSheetEntryDecomposedView decomposedViews, final Short userId) {
+            final CollectionSheetEntryDecomposedView decomposedViews, final Short userId) throws PersistenceException {
 
         final AccountPaymentEntity payment = accountPaymentAssembler.fromDto(userId, previousCollectionSheetEntryDto);
 

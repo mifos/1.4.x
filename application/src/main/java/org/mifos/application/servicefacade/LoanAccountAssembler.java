@@ -53,7 +53,7 @@ public class LoanAccountAssembler {
 
     public List<LoanBO> fromDto(final List<LoanAccountsProductView> loanAccountProductViews,
             final AccountPaymentEntity payment, final List<String> failedLoanDisbursementAccountNumbers,
-            final List<String> failedLoanRepaymentAccountNumbers) {
+            final List<String> failedLoanRepaymentAccountNumbers) throws PersistenceException {
 
         final List<LoanBO> loans = new ArrayList<LoanBO>();
 

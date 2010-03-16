@@ -43,6 +43,7 @@ import org.mifos.application.util.helpers.Methods;
 import org.mifos.framework.MifosMockStrutsTestCase;
 import org.mifos.framework.exceptions.ApplicationException;
 import org.mifos.framework.exceptions.PageExpiredException;
+import org.mifos.framework.exceptions.PersistenceException;
 import org.mifos.framework.exceptions.SystemException;
 import org.mifos.framework.hibernate.helper.StaticHibernateUtil;
 import org.mifos.framework.security.util.UserContext;
@@ -135,7 +136,7 @@ public class ReverseLoanDisbursalActionStrutsTest extends MifosMockStrutsTestCas
         verifyForward(ActionForwards.search_success.toString());
     }
 
-    public void testLoad() throws AccountException, PageExpiredException {
+    public void testLoad() throws AccountException, PageExpiredException, NumberFormatException, PersistenceException {
         createLoanAccount();
         disburseLoan();
 
@@ -152,7 +153,7 @@ public class ReverseLoanDisbursalActionStrutsTest extends MifosMockStrutsTestCas
         StaticHibernateUtil.closeSession();
     }
 
-    public void testPreviewWithoutNotes() throws AccountException {
+    public void testPreviewWithoutNotes() throws AccountException, NumberFormatException, PersistenceException {
         createLoanAccount();
         disburseLoan();
 
@@ -171,7 +172,7 @@ public class ReverseLoanDisbursalActionStrutsTest extends MifosMockStrutsTestCas
         verifyInputForward();
     }
 
-    public void testPreviewWithNoteGretaerThanMax() throws AccountException {
+    public void testPreviewWithNoteGretaerThanMax() throws AccountException, NumberFormatException, PersistenceException {
         createLoanAccount();
         disburseLoan();
 
@@ -199,7 +200,7 @@ public class ReverseLoanDisbursalActionStrutsTest extends MifosMockStrutsTestCas
 
     }
 
-    public void testPreview() throws AccountException {
+    public void testPreview() throws AccountException, NumberFormatException, PersistenceException {
         createLoanAccount();
         disburseLoan();
 
@@ -217,7 +218,7 @@ public class ReverseLoanDisbursalActionStrutsTest extends MifosMockStrutsTestCas
         verifyForward(ActionForwards.preview_success.toString());
     }
 
-    public void testUpdate() throws AccountException {
+    public void testUpdate() throws AccountException, NumberFormatException, PersistenceException {
         createLoanAccount();
         disburseLoan();
 
@@ -296,7 +297,7 @@ public class ReverseLoanDisbursalActionStrutsTest extends MifosMockStrutsTestCas
                 loanOffering);
     }
 
-    private void disburseLoan() throws AccountException {
+    private void disburseLoan() throws AccountException, NumberFormatException, PersistenceException {
         loan.setUserContext(userContext);
         loan.disburseLoan("4534", new Date(), Short.valueOf("1"), group.getPersonnel(), new Date(), Short.valueOf("1"));
         StaticHibernateUtil.commitTransaction();
